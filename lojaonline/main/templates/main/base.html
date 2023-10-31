@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="{% static 'main/style.css' %}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+
+
+
+
+    <div class="container-fluid main">
+
+
+
+        <div class="row topo">
+
+            <div class="col-12 topo-coluna text-end">
+                
+
+                {% if request.user.is_anonymous == True %}
+                <a href="/logar">login </a>|
+                {% else %}
+                Bem vindo(a) {{request.user}}! |
+                <a href="{% url 'main:logout' %}">logout</a> |
+
+                {% endif %}
+
+
+                <a href="/cadastro">cadastro </a>|
+
+
+                {% if request.user.username == 'admin' %}
+
+                <h4><a href="/admin">{{pedidos_pendentes}} pedidos aguardando envio...</a></h4>
+
+
+                {% endif %}
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+        <div class="row menu-navbar">
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/"><img class="logo" src="{% static 'main/logo-topo.png' %}"
+                            alt="Brand image"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <form class="d-flex" role="search" method="GET" action="{% url 'main:buscar' %}">
+                            <input class="form-control me-2" type="search" placeholder="O que você procura?" name="search_query"
+                                required aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
+
+                        <div>
+
+                            <a href="/carrinho/">
+
+                                <img class="carrinho-logo" src="{% static 'main/shopping-cart-64.png' %}">
+        
+            
+        
+                                </a>
+        
+
+                        </div>
+
+
+                        <div class="block">
+
+                            <div class="circle">
+                                <p>
+                                    {{cart | length}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <a href="/minha-conta">Minha conta</a>
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+
+
+            </nav>
+
+        </div>
+
+        <div class="row menu-escolhas">
+            <div class="col-3">
+
+            </div>
+            <div class="col-6">
+
+                <div class="row menu-escolhas-texto">
+
+                    <div class="col-1"></div>
+                    <div class="col-2 "><a href="/categoria/mouse" class="text-decoration-none text-reset">MOUSE</a>
+                    </div>
+                    <div class="col-2"><a href="/categoria/teclado" class="text-decoration-none text-reset">TECLADO</a>
+                    </div>
+                    <div class="col-2"><a href="/categoria/mousepad"
+                            class="text-decoration-none text-reset">MOUSEPAD</a></div>
+                    <div class="col-2"><a href="/categoria/fone" class="text-decoration-none text-reset">FONE</a></div>
+                    <div class="col-2"><a href="/categoria/monitor" class="text-decoration-none text-reset">MONITOR</a>
+                    </div>
+
+                    <div class="col-1"></div>
+
+                </div>
+
+
+            </div>
+            <div class="col-3">
+
+                <div class="row menu-escolhas-texto">
+                    <div class="col-8"></div>
+                    <div class="col-2"><i class="bi bi-search"></i></div>
+                    <div class="col-2"><i class="bi bi-bag"></i> </i></div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            {% load static %}
+            <div class="col-4"><img src="{% static 'main/final-mouse.jpg' %} " alt="final-mouse"></div>
+            <div class="col-4"><img src="{% static 'main/logo01.png' %}" alt="logo01.jpg"></div>
+            <div class="col-4"><img src="{% static 'main/mouse-pad.jpg' %}" alt="mouse-pad.jpg"></div>
+
+
+        </div>
+
+
+
+        <div class="row site p-5">
+
+            {% block content %}
+            {% endblock content %}
+
+        </div>
+
+        <div class="row">
+
+
+
+            <footer class="text-center text-white" style="background-color:#00050b">
+
+
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0);">
+                    © 2023 Copyright:
+                    <a class="text-white" href="#">finalstoreimports.com</a>
+
+                </div>
+                <!-- Copyright -->
+            </footer>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>

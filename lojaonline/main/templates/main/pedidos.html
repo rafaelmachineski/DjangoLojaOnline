@@ -1,0 +1,53 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+<h4>Home > Minha conta > Meus pedidos</h4>
+
+<hr>
+
+
+
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID do pedido</th>
+            <th scope="col">Data do pedido</th>
+            <th scope="col">Preço total</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos %}
+
+
+        <tr>
+
+
+            <th scope="row"><a href="/pedidos/{{pedido.id}}">{{pedido.id}}</a></th>
+            <td>{{pedido.data_pub}}</td>
+            <td>{{pedido.preco_total}} R$</td>
+            <td>
+
+                {% if pedido.status == 1 %}
+                <div>Aguardando envio</div>
+                {% elif pedido.status == 2 %}
+                <div class="text-success">Enviado</div>
+                {% elif pedido.status == 3 %}
+                <div class="text-success">Entregue</div>
+                {% endif %}
+            </td>
+
+
+        </tr>
+
+
+
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock content %}

@@ -1,0 +1,115 @@
+{% extends "main/base.html" %}
+
+
+{% block content %}
+<hr>
+
+
+<div class="row">
+
+    {% load static %}
+
+
+    <div class="col-8">
+
+        {% if cart|length == 0 %}
+
+        <h1 class="text-center">Carrinho vazio!</h1>
+
+        {% endif %}
+
+        {% for item in cart %}
+        {% with product=item.product %}
+
+
+        <div class="card-dark mb-3 bg-dark w-80">
+            <div class="row">
+                <div class="col-md-2">
+
+                    <a href=" /produto/{{product.slug}} " class="text-decoration-none text-reset">
+                        <img src="{{product.foto.url}}" class="rounded img-fluid " alt="...">
+                    </a>
+                </div>
+                <div class="col-md-6 align-self-center">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">{{product}} ({{product.marca}})</h3>
+                        <h5 class="card-text align-middle">Quantidade: {{item.quantidade}} </h5>
+                        <h6 class="card-text align-middle">- / +</h65>
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+
+
+
+                        <h5 class="card-text">Preço/unidade: R$ {{product.preco}} </h5>
+                        <h5 class="card-text">Preço total: R$ {{item.preco_total}} </h5>
+                        <form name="remover" method="post" action="{% url 'main:remover' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ product.id }}">
+                                <input class="btn btn-link btn-lg" type="submit" value="Remover Produto" />
+                        </form>
+                
+
+
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+        {% endwith %}
+        {% endfor %}
+
+    </div>
+
+    <div class="col-4">
+
+
+
+        <h1 class="text-center">{{cart | length}} produtos no carrinho</h1>
+        <h1 class="text-center">Preço total: {{cart.get_total_price}} R$</h1>
+
+        <form name="finalizar-compra" method="post" action="{% url 'main:finalizar-compra' %}">
+            {% csrf_token %}
+            <div class="text-center">
+                <input type="hidden" name="cart" value="{{ cart }}">
+                <input class="btn btn-success btn-lg" type="submit" value="Finalizar compra" />
+            </div>
+
+
+        </form>
+
+        <form name="limpar_carrinho" method="post" action="{% url 'main:limpar-carrinho' %}">
+            {% csrf_token %}
+            <div class="text-center">
+                <input class="btn btn-link btn-lg" type="submit" value="Limpar carrinho" />
+            </div>
+
+        </form>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock content %}

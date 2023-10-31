@@ -1,0 +1,132 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+<h4>Home > Categoria >
+    {% block name %}
+    {% endblock name %}</h4>
+
+<hr>
+
+
+
+
+<div class="col-3">
+
+<h5 class="text-primary">Aplicar filtros</h5>
+
+    <script src="{% static 'main/checkbox_selection.js' %}"></script>
+
+    <div class="row">
+        <h4>Marca</h4>
+
+
+
+
+
+        <ul class="list-unstyled">
+            {% for marca in marca_list %}
+            <li  onclick="select(this)"> 
+                <input  class="form-check-input marca_checkbox" type="checkbox" id="input_marca" checked>
+                <label class="form-check-label "  for="flexCheckChecked">
+                   {{marca.nome}}
+                </label>
+            </li>
+            {% endfor %}
+        </ul>
+
+
+
+    </div>
+
+    <div class="row">
+        <h4>Avaliação</h4>
+
+        <ul class="list-inline">
+            <li>5 estrelas</li>
+            <li>4 estrelas</li>
+            <li>3 estrelas</li>
+            <li>2 estrelas</li>
+            <li>1 estrelas</li>
+
+
+        </ul>
+
+    </div class="row">
+
+    <div class="row">
+        <h4>Preço</h4>
+
+        <ul class="list-inline">
+            <li>0-50R$</li>
+            <li>50-150R$</li>
+            <li>150-300R$</li>
+            <li>>300R$</li>
+
+        </ul>
+
+
+
+    </div class="row">
+
+    <div class="row"></div class="row">
+    <div class="row"></div class="row">
+    <div class="row"></div class="row">
+
+
+
+</div>
+
+
+<div class="col-9">
+
+
+    <div class="product-list">
+
+        <div class="row">
+            {% if product_list %}
+            <p>{{product_list|length}} produtos encontrados</p>
+            {% else %}
+            <p>Nenhum produto encontrado.</p>
+            {% endif %}
+        </div>
+
+        <div class="row">
+
+
+            {% if product_list %}
+            {% for product in product_list %}
+            <div class="col-4">
+
+                <a href=" /produto/{{product.slug}} " class="text-decoration-none text-reset">
+
+                    <div class="card-dark bg-dark mb-5" style="width: 18rem;">
+                        <img src="{{product.foto.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title ">{{ product }}  </h5>
+                            <h6 class="card-title text-secondary">{{product.marca}} </h6>
+
+                            <h4 class="card-text text-end ">
+                                R$ {{ product.preco}} 
+
+                            </h4>
+                        </div>
+                    </div>
+
+                </a>
+
+            </div>
+            {% endfor %}
+            {% endif %}
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+

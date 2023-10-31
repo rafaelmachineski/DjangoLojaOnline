@@ -1,0 +1,56 @@
+
+{% extends "main/base.html" %}
+
+
+{% block content %}
+<hr>
+
+<div class="d-flex justify-content-center ">
+  <form class="w-50 border p-3" method="POST">
+
+    <h2>Cadastro</h2>
+    {% csrf_token %}
+
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label-lg ">Usuário</label>
+      <div class="col-sm-10">
+        {{form.username}}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-2 col-form-label-lg ">E-mail</label>
+      <div class="col-sm-10">
+        {{form.email}}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label-lg">Senha</label>
+      <div class="col-sm-10">
+        {{form.password1}}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label-lg">Confirmar</label>
+      <div class="col-sm-10">
+        {{form.password2}}
+      </div>
+    </div>
+
+    <input class="btn-primary btn-lg" type="submit"  value="Cadastrar"/>
+  </form>
+
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+

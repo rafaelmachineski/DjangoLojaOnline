@@ -1,0 +1,32 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<hr>
+
+<div class="col-6">
+    <img src="{{product.foto.url}}" class="imagem-pagina-produto" alt="...">
+</div>
+<div class="col-6">
+    <h1>{{product.nome}}</h1>
+    <h5>{{product.descricao}}</h4>
+    <h5>Marca: {{product.marca}}</h4>
+    <h5>Preço: {{product.preco}} R$ à vista</h4>
+
+    <form action="/carrinho/" method="POST">
+        {% csrf_token %}
+        
+        <label for="quantity"><h5>Quant: </h5></label>
+        <input type="hidden" name="id" value="{{ product.id }}">
+        <input type="number" id="quantidade" value="0" name="quantidade" min="1" max="10">
+        <button type="submit" class="btn btn-primary btn-md">Comprar</button>
+    
+    </form>
+
+
+</div>
+
+
+
+{% endblock content %}
